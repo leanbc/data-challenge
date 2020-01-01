@@ -4,7 +4,7 @@ Kafka-Docker-Solution
 ## Minimum requirements
 
 * Docker 19.03.5
-* Python 3.7.0
+* Python3
 
 # Description
 
@@ -95,3 +95,8 @@ The consumer can be set in 2 modes: `stdout` or `psql`
 
     - Via Make run: `make postgres`. Which will log you in the psql container.
     And then run: `Select count(*) From topic_name;` it will give you the number of mesagges inserted at the moment.
+
+##### Close and Destroy The Cluster
+
+run: `make stop_cluster`
+
