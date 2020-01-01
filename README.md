@@ -1,7 +1,7 @@
 Kafka-Docker-Solution
 ========================
 
-##Minimum requirements
+## Minimum requirements
 
 * Docker 19.03.5
 * Python 3.7.0
