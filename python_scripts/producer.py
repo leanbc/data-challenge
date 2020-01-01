@@ -6,6 +6,7 @@ import gzip
 import shutil
 import logging
 import os
+import time
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
@@ -32,11 +33,15 @@ url = 'http://tx.tamedia.ch.s3.amazonaws.com/challenge/data/stream.jsonl.gz'
 
 logging.info('Downloading data from http://tx.tamedia.ch.s3.amazonaws.com/challenge/data/stream.jsonl.gz')
 
+time.sleep(5)
+
+logging.info('This may take some minutes....')
+logging.info('A bit annoying, right?')
+
 urllib.request.urlretrieve(url, setting_absolute_path + '/data_to_load/data_sample.jsonl.gz')
 
 logging.info('Data downloaded to /data_to_load/data_sample.jsonl.gz')
-logging.info('This may take some minutes....')
-logging.info('A bit annoying, right?')
+
 
 
 with gzip.open( setting_absolute_path + '/data_to_load/data_sample.jsonl.gz', 'rb') as f_in:

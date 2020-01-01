@@ -28,7 +28,7 @@ _start_cluster:
 
 _postgres:
 	( \
-	 docker exec -it kafka-docker_db_1 psql -U postgres ; \
+	 docker exec -it challenge-data-eng_db_1 psql -U postgres ; \
 	)
 
 _stop_cluster:

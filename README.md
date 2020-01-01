@@ -66,6 +66,8 @@ run : `pip3 install -r requirements.txt`
 
 The producer will download the file from `'http://tx.tamedia.ch.s3.amazonaws.com/challenge/data/stream.jsonl.gz'` send the messages to the desired topic.
 
+The logs on the console will let you know that the producer is working:
+```INFO:Producer is reading the file now```
 
 ##### Create Consumer
 
@@ -86,6 +88,7 @@ The consumer can be set in 2 modes: `stdout` or `psql`
 
 - If consumer mode = `stdout` , run this from the command line:
 
+    -Run `sh count.sh name_of_the_topic` the count of messages will be printed to the console
 
 
 - If consumer mode = `psql` , 2 ways to do it:
