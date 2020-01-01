@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 import psycopg2
 
+# Getting topic and mode from parameters at run time. If not, throw error.
 
 
 try:
@@ -20,13 +21,14 @@ except IndexError:
     raise
 
 
+# moving the working directory on folder above
 
 setting_absolute_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 path_to_log_folder= setting_absolute_path + '/logs/' + topic
 
 
-#check if directory exist
+#check if log directory exist. TRUE: remove everyting inside. FALSE: create the directory
 
 
 if os.path.exists(path_to_log_folder):
@@ -37,6 +39,7 @@ else:
     os.mkdir(path_to_log_folder)
 
 
+#logging config depending on mode
 
 if mode=='stdout':
     logging.basicConfig(filename= path_to_log_folder + '/'  +  datetime.now().strftime('%Y%m%d_%H%M%S') +'.log', filemode='w', level=logging.INFO)
@@ -45,10 +48,26 @@ else:
 
 
 
+###### HELPERS #######
 
-def create_table(topic=topic):
+#function that will make code more readble
+
+def connect_to_psql():
 
     conn=psycopg2.connect(dbname='postgres', user='postgres', host='localhost', password='example', port=4444)
+    conn.autocommit = True
+
+    return conn
+
+
+def close_connection_to_psql(conn):
+
+    conn.close()
+
+
+#this function will create a table in the docker postgres insatance
+
+def create_table(topic,conn):
 
     cursor=conn.cursor()
 
@@ -61,23 +80,25 @@ def create_table(topic=topic):
     """.format(topic)
 
     cursor.execute(stmt)
-    conn.commit()
 
-    conn.close()
 
-def insert_value(table_name, val1 ,val2, val3):
 
-    conn=psycopg2.connect(dbname='postgres', user='postgres', host='localhost', password='example', port=4444)
+#this function will insert values in the table table in the docker postgres insatance
+
+def insert_value(table_name, val1 ,val2, val3,conn):
+
 
     cursor=conn.cursor()
 
     stmt="INSERT INTO {} (uid, message, ts) VALUES ('{}', '{}', '{}');".format(table_name,val1,val2,val3)
 
     cursor.execute(stmt)
-    conn.commit()
 
-    conn.close()
 
+
+###### MAIN FUNCTION #######
+
+#here is where the action takes place
 
 def main():
 
@@ -94,7 +115,9 @@ def main():
 
     if mode=='psql':
 
-        create_table(topic=topic)
+        conn=connect_to_psql()
+        create_table(topic,conn)
+        close_connection_to_psql(conn)
         logging.info('Table public.{} has been created'.format(topic))
         logging.info('--------------------------------------------')
         logging.info('--------------------------------------------')
@@ -105,14 +128,19 @@ def main():
         logging.info('--------------------------------------------')
         logging.info('--------------------------------------------')
 
+
+        conn=connect_to_psql()
         for m in consumer:
 
             i+=1
             message=str(m.value).replace("'", "''")
             insert_value(topic,
-                         val1= str(m.value['uid']),
-                         val2=message ,
-                         val3=datetime.utcfromtimestamp(int(m.value['ts'])).strftime('%Y-%m-%d %H:%M:%S'))
+                         str(m.value['uid']),
+                         message ,
+                         datetime.utcfromtimestamp(int(m.value['ts'])).strftime('%Y-%m-%d %H:%M:%S'),
+                         conn)
+
+        close_connection_to_psql(conn)
 
     elif mode=='stdout':
 

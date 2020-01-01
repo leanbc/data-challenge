@@ -91,9 +91,11 @@ The consumer can be set in 2 modes: `stdout` or `psql`
     -Run `sh count.sh name_of_the_topic` the count of messages will be printed to the console
 
 
-- If consumer mode = `psql` , 2 ways to do it:
+- If consumer mode = `psql`:
 
     - Via Make run: `make postgres`. Which will log you in the psql container.
+    - Via Docker: `docker exec -it challenge-data-eng_db_1 psql -U postgres `
+   
     And then run: `Select count(*) From topic_name;` it will give you the number of mesagges inserted at the moment.
 
 ##### Close and Destroy The Cluster
