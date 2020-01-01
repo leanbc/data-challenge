@@ -37,7 +37,7 @@ There are 2 ways of handling this cluster:
 
 
 
-- cd to `kafka-docker` directory.
+- cd to `data-challenge-eng` directory.
 
 ##### Spin up cluster 
 - `docker-compose up -d` OR `make start_cluster`
