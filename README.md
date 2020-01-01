@@ -39,6 +39,10 @@ There are 2 ways of handling this cluster:
 
 - cd to `data-challenge-eng` directory.
 
+#### Install python modules 
+
+run : `pip3 install -r requirements.txt`
+
 ##### Spin up cluster 
 - `docker-compose up -d` OR `make start_cluster`
 
