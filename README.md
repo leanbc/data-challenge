@@ -6,9 +6,9 @@ Kafka-Docker-Solution
 * Docker 19.03.5
 * Python 3.7.0
 
-#Description
+# Description
 
-###Infraestructure
+### Infraestructure
 
 Consists of 3 docker containers each of them encapsulating the following services
 
@@ -18,7 +18,7 @@ Consists of 3 docker containers each of them encapsulating the following service
 
 For this MVP, only a one single broker will be spun up.
 
-###Logic of the workflow
+### Logic of the workflow
 
 - Spin up cluster 
 - Create Kafka Topic
@@ -26,7 +26,7 @@ For this MVP, only a one single broker will be spun up.
 - Create Kafka Consumer that will consume the jsonl file
 - Count Consumed Messages 
 
-###How to achive this logic
+### How to achive this logic
 
 There are 2 ways of handling this cluster:
 
@@ -88,7 +88,3 @@ The consumer can be set in 2 modes: `stdout` or `psql`
 
     - Via Make run: `make postgres`. Which will log you in the psql container.
     And then run: `Select count(*) From topic_name;` it will give you the number of mesagges inserted at the moment.
-    
-
-
-# data-challenge
