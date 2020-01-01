@@ -6,6 +6,8 @@ import os
 from datetime import datetime
 import psycopg2
 
+
+
 try:
     topic=sys.argv[1]
     mode=sys.argv[2]
@@ -36,9 +38,10 @@ else:
 
 
 
-logging.basicConfig(filename= path_to_log_folder + '/'  +  datetime.now().strftime('%Y%m%d_%H%M%S') +'.log', filemode='w', level=logging.INFO)
-
-
+if mode=='stdout':
+    logging.basicConfig(filename= path_to_log_folder + '/'  +  datetime.now().strftime('%Y%m%d_%H%M%S') +'.log', filemode='w', level=logging.INFO)
+else:
+    logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
 
 
@@ -85,11 +88,22 @@ def main():
         value_deserializer=lambda m: loads(m.decode('utf-8')),
         bootstrap_servers=['localhost:9092'])
 
-    create_table(topic=topic)
+
 
     i = 0
 
     if mode=='psql':
+
+        create_table(topic=topic)
+        logging.info('Table public.{} has been created'.format(topic))
+        logging.info('--------------------------------------------')
+        logging.info('--------------------------------------------')
+        logging.info('Open a new terminal and run : make postgres.')
+        logging.info('--------------------------------------------')
+        logging.info('--------------------------------------------')
+        logging.info('Then run this query: Select count(*) from {};'.format(topic))
+        logging.info('--------------------------------------------')
+        logging.info('--------------------------------------------')
 
         for m in consumer:
 
