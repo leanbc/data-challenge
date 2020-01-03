@@ -33,15 +33,18 @@ There are 2 ways of handling this cluster:
 - Via Command Line / Terminal
 - Via Make commands (Make is required in this case)
 
-#### Command line 
+Both ways will be explained parallelly
 
+### Let's get started
+
+##### Change to the Repo Directory
 
 
 - cd to `data-challenge-eng` directory.
 
-#### Install python modules 
+##### Install python modules 
 
-run : `pip3 install -r requirements.txt`
+- run : `pip3 install -r requirements.txt`
 
 ##### Spin up cluster 
 - `docker-compose up -d` OR `make start_cluster`
