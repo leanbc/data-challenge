@@ -88,6 +88,7 @@ The consumer can be set in 3 modes: `stdout` or `psql` or `mongo`
 - `make create_consumer TOPIC=yourtopicname MODE=mode`
     - for example: `make create_consumer TOPIC=test MODE=stdout`
     - for example: `make create_consumer TOPIC=test MODE=psql`
+    - for example: `make create_consumer TOPIC=test MODE=mongo`
 
 ##### count messages of the last consumer created
 
