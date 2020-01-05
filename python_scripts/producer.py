@@ -45,9 +45,9 @@ def main():
     logging.info('This may take some minutes....')
     logging.info('A bit annoying, right?')
 
-    urllib.request.urlretrieve(url, setting_absolute_path + '/data_to_load/data_sample.jsonl.gz')
-
-    logging.info('Data downloaded to /data_to_load/data_sample.jsonl.gz')
+    # urllib.request.urlretrieve(url, setting_absolute_path + '/data_to_load/data_sample.jsonl.gz')
+    #
+    # logging.info('Data downloaded to /data_to_load/data_sample.jsonl.gz')
 
     #unzipping file
 

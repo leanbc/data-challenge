@@ -5,6 +5,7 @@ import sys
 import os
 from datetime import datetime
 import psycopg2
+import pymongo
 
 # Getting topic and mode from parameters at run time. If not, throw error.
 
@@ -16,7 +17,7 @@ except IndexError:
     logging.error('-------------------------------------')
     logging.error('You need to specify an existing topic and the mode of execution as an argument at runtime.')
     logging.error('Something like :')
-    logging.error('python3 consumer.py topicname stdout/psql')
+    logging.error('python3 consumer.py topicname stdout/psql/mongo')
     logging.error('-------------------------------------')
     raise
 
@@ -149,6 +150,31 @@ def main():
             print(m.value)
             print(datetime.utcfromtimestamp(int(m.value['ts'])).strftime('%Y-%m-%d %H:%M:%S'))
             logging.info('{}'.format(str(i)))
+
+    elif mode=='mongo':
+
+        client = pymongo.MongoClient('mongodb://localhost:27017/',
+                                     username='admin',
+                                     password='admin')
+        logging.info('Connected to Mongo')
+        db = client[topic]
+        logging.info('Database {} created'.format(topic))
+        collection = db[topic]
+        logging.info('Collection {} created'.format(topic))
+
+        logging.info('Open a new terminal and run : make mongo.')
+        logging.info('--------------------------------------------')
+        logging.info('--------------------------------------------')
+        logging.info('Then run this command: use {};'.format(topic))
+        logging.info('--------------------------------------------')
+        logging.info('--------------------------------------------')
+        logging.info('Then run this query: db.{}.count();'.format(topic))
+
+
+        for m in consumer:
+            i+=1
+            collection.insert(m.value,check_keys=False)
+
 
 
 

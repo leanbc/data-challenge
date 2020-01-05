@@ -19,6 +19,10 @@ create_producer : _create_producer
 
 # Run it like: make create_producer TOPIC=yourtopicname
 
+mongo: _mongo
+
+# Run it like: make mongo
+
 
 _start_cluster:
 	( \
@@ -50,4 +54,9 @@ _create_consumer:
 _create_producer:
 	( \
 	 python3 ./python_scripts/producer.py ${TOPIC} ; \
+	)
+
+_mongo:
+	( \
+	docker exec -it mongodb  mongo --username admin --password admin ;\
 	)
