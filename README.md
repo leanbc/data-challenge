@@ -84,6 +84,7 @@ The consumer can be set in 3 modes: `stdout` or `psql` or `mongo`
 - `python3 python_scripts/consumer.py.py name_of_the_topic_you_want_to_read mode`
     - for example: `python3 python_scripts/consumer.py.py test psql`
     - for example: `python3 python_scripts/consumer.py.py test stdout`
+    - for example: `python3 python_scripts/consumer.py.py test mongo`
     
 - `make create_consumer TOPIC=yourtopicname MODE=mode`
     - for example: `make create_consumer TOPIC=test MODE=stdout`
