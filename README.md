@@ -79,7 +79,7 @@ The consumer can be set in 3 modes: `stdout` or `psql` or `mongo`
 
     - `stdout`: will output messages to console and create  a simple count in the logs directory.
     - `psql`: will create a table, with the name of the topic, in the postgres instance.
-    - `mongo`: will create a databese, with the name of the topic, in the mongo instance.
+    - `mongo`: will create a database, with the name of the topic, in the mongo instance.
 
 - `python3 python_scripts/consumer.py.py name_of_the_topic_you_want_to_read mode`
     - for example: `python3 python_scripts/consumer.py.py test psql`
@@ -105,10 +105,10 @@ The consumer can be set in 3 modes: `stdout` or `psql` or `mongo`
 
 - If consumer mode = `mongo`:
 
-    - Via Make run: `make mongo`. Which will log you in the psql container.
+    - Via Make run: `make mongo`. Which will log you in the mongo container.
     - Via Docker: `docker exec -it mongodb  mongo --username admin --password admin `
    
-    And then run: `use yourtopicname` and after that `db.yourtopicname.count()`
+    And then run: `use yourtopicname;` and after that `db.yourtopicname.count();`
 
 
 ##### Close and Destroy The Cluster
