@@ -101,7 +101,7 @@ The consumer can be set in 3 modes: `stdout` or `psql` or `mongo`
 - If consumer mode = `psql`:
 
     - Via Make run: `make postgres`. Which will log you in the psql container.
-    - Via Docker: `docker exec -it challenge-data-eng_db_1 psql -U postgres `
+    - Via Docker: `docker exec -it data-challenge-eng_db_1 psql -U postgres `
    
     And then run: `Select count(*) From topic_name;` it will give you the number of mesagges inserted at the moment.
 
