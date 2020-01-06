@@ -25,10 +25,9 @@ _start_cluster:
 	docker-compose up -d ; \
 	)
 
-
 _postgres:
 	( \
-	 docker exec -it challenge-data-eng_db_1 psql -U postgres ; \
+	 docker exec -it data-challenge-eng_db_1 psql -U postgres ; \
 	)
 
 _stop_cluster:
