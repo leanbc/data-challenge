@@ -148,8 +148,6 @@ def main():
         for m in consumer:
             i+=1
             print(m.value)
-            print(datetime.utcfromtimestamp(int(m.value['ts'])).strftime('%Y-%m-%d %H:%M:%S'))
-            logging.info('{}'.format(str(i)))
 
     elif mode=='mongo':
 

@@ -17,7 +17,7 @@ create_consumer : _create_consumer
 
 create_producer : _create_producer
 
-# Run it like: make create_producer TOPIC=yourtopicname
+# Run it like: make create_producer TOPIC=yourtopicname DATA_TO_PRODUCE=
 
 mongo: _mongo
 
@@ -43,7 +43,7 @@ _stop_cluster:
 
 _create_topic:
 	( \
-	 python3 ./python_scripts/create_topic.py ${TOPIC} ; \
+	 python3 ./python_scripts/create_topic.py ${TOPIC}; \
 	)
 
 _create_consumer:
@@ -53,7 +53,7 @@ _create_consumer:
 
 _create_producer:
 	( \
-	 python3 ./python_scripts/producer.py ${TOPIC} ; \
+	 python3 ./python_scripts/producer.py ${TOPIC} ${DATA_TO_PRODUCE} ; \
 	)
 
 _mongo:
